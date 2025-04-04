@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apoie o GamerBR_Oficial | StreamBoost</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1A1A1A',
+            secondary: '#232323',
+            accent: '#3E3E3E',
+            highlight: '#535353',
+            dark: '#121212',
+            darker: '#0A0A0A',
+            light: '#FFFFFF',
+            pix: '#4A90E2'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            title: ['Montserrat', 'sans-serif'],
+          },
+          boxShadow: {
+            'elegant': '0 4px 20px rgba(0, 0, 0, 0.15)',
+            'subtle': '0 2px 10px rgba(0, 0, 0, 0.08)',
+          },
+          backgroundImage: {
+            'gradient-elegant': 'linear-gradient(145deg, #232323 0%, #1A1A1A 100%)',
+          },
+        }
+      }
+    }
+  </script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      background-color: #111111;
+      background-image:
+        linear-gradient(to bottom, rgba(18, 18, 18, 0.97), rgba(10, 10, 10, 0.98)),
+        url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .bg-card {
+      background-color: rgba(26, 26, 26, 0.95);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(62, 62, 62, 0.1);
+    }
+
+    .bg-card-dark {
+      background-color: rgba(18, 18, 18, 0.95);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(62, 62, 62, 0.1);
+    }
+
+    .elegant-input {
+      background-color: rgba(35, 35, 35, 0.8);
+      border: 1px solid rgba(62, 62, 62, 0.3);
+      color: #fff;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+    }
+
+    .elegant-input:focus {
+      border-color: rgba(83, 83, 83, 0.8);
+      box-shadow: 0 0 0 2px rgba(83, 83, 83, 0.2);
+      outline: none;
+    }
+
+    .status-bar {
+      height: 6px;
+      background: rgba(35, 35, 35, 0.8);
+      overflow: hidden;
+      border-radius: 3px;
+    }
+
+    .status-value {
+      height: 100%;
+      background: linear-gradient(90deg, #4A90E2, #6A5AE0);
+      position: relative;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(26, 26, 26, 0.5);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3E3E3E;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #535353;
+    }
+
+    .elegant-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: rgba(35, 35, 35, 0.8);
+      border-radius: 8px;
+      border: 1px solid rgba(83, 83, 83, 0.2);
+    }
+
+    .elegant-btn:hover {
+      background: rgba(62, 62, 62, 0.9);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .elegant-btn:active {
+      transform: translateY(1px);
+    }
+
+    .timer-section {
+      background: linear-gradient(to right, rgba(35, 35, 35, 0.8), rgba(26, 26, 26, 0.8));
+      border-radius: 6px;
+    }
+
+    .timer-box {
+      background: rgba(18, 18, 18, 0.9);
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .step-container {
+      display: none;
+    }
+
+    .step-container.active {
+      display: block;
+    }
+
+    .step-indicator {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: rgba(35, 35, 35, 0.8);
+      border: 1px solid rgba(83, 83, 83, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .step-indicator.active {
+      background-color: #4A90E2;
+      border-color: #4A90E2;
+    }
+
+    .step-indicator.completed {
+      background-color: #4A90E2;
+      border-color: #4A90E2;
+    }
+  </style>
+</head>
+
+<body class="text-white min-h-screen flex flex-col">
+  <header class="sticky top-0 z-50 bg-card-dark shadow-subtle">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="text-xl text-light opacity-90">
+          <i class="fas fa-crown"></i>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-gray-400 font-medium">StreamBoost</p>
+          <h1 class="text-xl font-light font-title tracking-wide">
+            GamerBR<span class="font-semibold">_Oficial</span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex items-center bg-card rounded-full px-4 py-1.5">
+          <div class="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse mr-2"></div>
+          <span class="text-xs font-medium">AO VIVO</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex-grow container mx-auto p-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 xl:grid-cols-12 gap-6">
+      <div class="lg:col-span-3 xl:col-span-3 space-y-6 z-10 order-2 lg:order-1">
+        <div class="bg-card rounded-xl overflow-hidden shadow-elegant">
+          <div class="bg-gradient-elegant h-20 relative">
+            <div
+              class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full overflow-hidden border-4 border-primary shadow-lg">
+              <img src="https://placehold.co/200x200/1E293B/FFFFFF?text=BR" alt="GamerBR_Oficial"
+                class="w-full h-full object-cover">
+            </div>
+          </div>
+
+          <div class="pt-10 pb-5 px-6 text-center">
+            <h2 class="text-lg font-title font-medium tracking-wide">GamerBR<span class="font-semibold">_Oficial</span>
+            </h2>
+            <p class="text-accent text-sm my-1 font-light">Streamer Profissional</p>
+
+            <div class="flex justify-center space-x-6 text-sm mt-4">
+              <div class="text-gray-400">
+                <i class="fas fa-trophy text-accent mr-2"></i>
+                <span>Top 10</span>
+              </div>
+              <div class="text-gray-400">
+                <i class="fas fa-users text-accent mr-2"></i>
+                <span>12.3k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-xl overflow-hidden shadow-elegant">
+          <div class="bg-gradient-elegant px-6 py-4">
+            <h3 class="font-title font-medium text-base">Meta: Setup Upgrade</h3>
+          </div>
+
+          <div class="p-6">
+            <div class="status-bar rounded-full mb-3">
+              <div class="status-value rounded-full" style="width: 75%"></div>
+            </div>
+
+            <div class="flex justify-between text-sm text-gray-300 mb-5">
+              <span>R$3,785</span>
+              <span>Meta: R$5,000</span>
+            </div>
+
+            <div class="border-t border-accent/10 pt-5 mt-4 space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-gray-400">Jogo:</span>
+                <span class="font-light">Fortnite</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Online:</span>
+                <span class="font-light">3h 27m</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-xl overflow-hidden shadow-elegant">
+          <div class="bg-gradient-elegant px-6 py-4">
+            <h3 class="font-title font-medium text-base">Benefícios</h3>
+          </div>
+
+          <div class="p-6">
+            <ul class="space-y-4 text-sm">
+              <li class="flex items-start">
+                <i class="fas fa-check text-pix mt-1 mr-3"></i>
+                <span class="text-gray-300">Mensagem destacada na stream</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check text-pix mt-1 mr-3"></i>
+                <span class="text-gray-300">Badge exclusiva no chat</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check text-pix mt-1 mr-3"></i>
+                <span class="text-gray-300">Acesso ao Discord VIP</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6 xl:col-span-6 flex flex-col justify-start space-y-6 z-10 order-1 lg:order-2">
+        <div class="bg-card rounded-xl overflow-hidden shadow-elegant">
+          <div class="bg-gradient-elegant p-6">
+            <div class="flex justify-between items-center">
+              <h2 class="text-xl font-title font-medium tracking-wide">Apoie o GamerBR_Oficial</h2>
+              <div class="flex items-center bg-darker/40 rounded-lg px-3 py-1.5">
+                <div class="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse mr-2"></div>
+                <span class="text-xs font-light">AO VIVO</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark border-t border-b border-accent/10 py-4 px-6">
+            <div class="flex justify-between">
+              <div class="flex items-center">
+                <div class="step-indicator active" id="step1-indicator">1</div>
+                <div class="h-0.5 w-8 bg-accent/30 mx-2"></div>
+                <div class="step-indicator" id="step2-indicator">2</div>
+                <div class="h-0.5 w-8 bg-accent/30 mx-2"></div>
+                <div class="step-indicator" id="step3-indicator">3</div>
+                <div class="h-0.5 w-8 bg-accent/30 mx-2"></div>
+                <div class="step-indicator" id="step4-indicator">4</div>
+              </div>
+
+              <div>
+                <div class="flex items-center">
+                  <i class="fas fa-gem text-pix mr-2"></i>
+                  <p class="text-sm font-light">Oferta exclusiva para seguidores</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-container active" id="step1">
+            <div class="p-8">
+              <div class="mb-6">
+                <h3 class="text-lg font-medium mb-5 text-center">Envie uma mensagem</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Seu nome de usuário</label>
+                    <input type="text" id="donation-name"
+                      class="elegant-input w-full rounded-lg py-3 px-4 focus:border-highlight">
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium mb-2 text-gray-300">Valor (R$)</label>
+                    <div class="relative mb-2">
+                      <input type="number" id="donation-amount" min="1" value="5"
+                        class="elegant-input w-full rounded-lg py-3 pl-12 pr-4 focus:border-highlight">
+                      <div class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-300 font-medium">R$</div>
+                    </div>
+                    <div class="flex justify-between gap-2">
+                      <button id="amount-2"
+                        class="elegant-btn py-1.5 px-2 text-sm w-full text-gray-300 hover:text-white">R$2</button>
+                      <button id="amount-5"
+                        class="elegant-btn py-1.5 px-2 text-sm w-full bg-pix/20 border-pix/30 text-white font-medium transform scale-110 shadow-lg">R$5</button>
+                      <button id="amount-10"
+                        class="elegant-btn py-1.5 px-2 text-sm w-full text-gray-300 hover:text-white">R$10</button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2">Valor mais popular: <span
+                        class="text-pix font-medium">R$5</span> (escolhido por <span class="font-medium">68%</span> dos
+                      apoiadores)</p>
+                  </div>
+                </div>
+
+                <div class="mb-5">
+                  <div class="flex justify-between mb-2">
+                    <label class="block text-sm font-medium text-gray-300">Mensagem</label>
+                    <span id="char-counter" class="text-xs text-gray-500">0/280 caracteres</span>
+                  </div>
+                  <textarea id="donation-message" maxlength="280"
+                    class="elegant-input w-full rounded-lg py-3 px-4 h-24 focus:border-highlight"></textarea>
+                </div>
+
+                <div class="mb-5 bg-secondary/30 p-4 rounded-lg border border-accent/20">
+                  <div class="flex items-start">
+                    <div class="text-pix text-lg mr-3">
+                      <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-sm mb-1">Impacte a stream!</h4>
+                      <p class="text-xs text-gray-300">Doe R$5 ou mais e sua mensagem vai aparecer em destaque na
+                        transmissão. Todos vão ver!</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-5 bg-pix/10 p-4 rounded-lg border border-pix/20">
+                  <div class="flex items-start">
+                    <div class="text-pix text-lg mr-3">
+                      <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-sm mb-1">Oferta por tempo limitado!</h4>
+                      <p class="text-xs text-gray-300">Aproveite! Nas próximas <span class="text-pix font-medium">12
+                          horas</span>, todas as doações de R$5 ou mais receberão <span class="font-medium">destaque
+                          especial</span> na stream.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="text-xs text-gray-400 mb-5 text-center px-10">
+                  Ao clicar em continuar, você declara que leu e concorda com os
+                  <a href="#" class="text-pix hover:underline">Termos de Uso</a> e a
+                  <a href="#" class="text-pix hover:underline">Política de Privacidade</a>.
+                </div>
+
+                <button id="continue-to-step2"
+                  class="w-full bg-pix/90 hover:bg-pix transition-all py-3.5 rounded-lg font-medium text-base shadow-lg flex items-center justify-center">
+                  <span>Continuar</span>
+                  <i class="fas fa-arrow-right ml-3"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-container" id="step2">
+            <div class="p-8">
+              <div class="mb-6">
+                <h3 class="text-lg font-medium mb-3 text-center">Personalize sua experiência</h3>
+                <p class="text-sm text-gray-300 text-center mb-6">Escolha extras especiais para tornar sua doação ainda
+                  mais memorável!</p>
+
+                <div class="space-y-4 mb-6">
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="sound-effect" class="mr-4 h-5 w-5 accent-pix">
+                      <div class="w-full">
+                        <label for="sound-effect" class="font-medium cursor-pointer flex justify-between">
+                          <span>Efeito sonoro personalizado</span>
+                          <span class="text-pix font-light">+R$3</span>
+                        </label>
+                        <p class="text-xs text-gray-400">Um efeito sonoro de sua escolha será reproduzido durante a
+                          live!</p>
+                        <div class="mt-3 hidden sound-effect-options">
+                          <select class="w-full bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
+                            <option value="" disabled selected>Escolha um efeito sonoro...</option>
+                            <option value="tada">🎉 Ta-daa!</option>
+                            <option value="drums">🥁 Batuque</option>
+                            <option value="laugh">😂 Risada</option>
+                            <option value="wow">😮 Uau!</option>
+                            <option value="applause">👏 Aplausos</option>
+                            <option value="custom">✨ Personalizado</option>
+                          </select>
+                          <input type="text" placeholder="Mensagem para ser lida com o efeito (opcional)"
+                            class="w-full bg-secondary/50 text-sm p-2 rounded-md mt-2 border border-accent/20">
+                          <div class="mt-2 flex justify-between">
+                            <span class="text-xs text-gray-400">Prévia do som:</span>
+                            <button
+                              class="text-xs bg-pix/60 hover:bg-pix/90 transition px-2 py-1 rounded flex items-center">
+                              <i class="fas fa-play mr-1"></i> Ouvir
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-pix/40 hover:border-pix transition-all cursor-pointer relative transform scale-[1.02] shadow-md">
+                    <div class="absolute -top-2 -right-2 bg-pix text-xs py-1 px-2 rounded-full shadow-md">
+                      Mais popular!
+                    </div>
+                    <div class="flex items-center">
+                      <input type="checkbox" id="animation" checked class="mr-4 h-5 w-5 accent-pix">
+                      <div class="w-full">
+                        <label for="animation" class="font-medium cursor-pointer flex justify-between">
+                          <span>Animação na tela</span>
+                          <span class="text-pix font-light">+R$5</span>
+                        </label>
+                        <p class="text-xs text-gray-400">Uma animação exclusiva aparecerá durante a transmissão!</p>
+                        <div class="mt-3 animation-options">
+                          <div class="grid grid-cols-4 gap-2">
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-pix/40 flex flex-col items-center cursor-pointer animation-option selected">
+                              <span class="text-xl">🎊</span>
+                              <span class="text-xs mt-1">Confete</span>
+                            </div>
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex flex-col items-center cursor-pointer animation-option">
+                              <span class="text-xl">❤️</span>
+                              <span class="text-xs mt-1">Corações</span>
+                            </div>
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex flex-col items-center cursor-pointer animation-option">
+                              <span class="text-xl">🔥</span>
+                              <span class="text-xs mt-1">Fogo</span>
+                            </div>
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex flex-col items-center cursor-pointer animation-option">
+                              <span class="text-xl">🎮</span>
+                              <span class="text-xs mt-1">Gamer</span>
+                            </div>
+                          </div>
+                          <div class="mt-2 flex space-x-2">
+                            <input type="text" placeholder="Sua mensagem para aparecer com a animação"
+                              class="flex-1 bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
+                            <button
+                              class="bg-pix/60 hover:bg-pix/90 transition px-3 py-1 rounded flex items-center text-sm">
+                              <i class="fas fa-eye mr-1"></i> Ver prévia
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="highlight" class="mr-4 h-5 w-5 accent-pix">
+                      <div class="w-full">
+                        <label for="highlight" class="font-medium cursor-pointer flex justify-between">
+                          <span>Destaque especial</span>
+                          <span class="text-pix font-light">+R$8</span>
+                        </label>
+                        <p class="text-xs text-gray-400">Sua doação ficará destacada por mais tempo na transmissão!</p>
+                        <div class="mt-2 flex">
+                          <div class="flex-1 h-1.5 rounded-full bg-secondary/50 overflow-hidden">
+                            <div class="h-full w-1/3 bg-pix"></div>
+                          </div>
+                          <span class="text-xs ml-2 text-gray-400">+30s</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="emoji-rain" class="mr-4 h-5 w-5 accent-pix">
+                      <div class="w-full">
+                        <label for="emoji-rain" class="font-medium cursor-pointer flex justify-between">
+                          <span>Chuva de emojis</span>
+                          <span class="text-pix font-light">+R$4</span>
+                        </label>
+                        <p class="text-xs text-gray-400">Uma chuva de emojis personalizados tomará conta da tela!</p>
+                        <div class="mt-3 hidden emoji-rain-options">
+                          <div class="grid grid-cols-6 gap-2">
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex justify-center items-center cursor-pointer emoji-option">
+                              <span class="text-lg">👾</span>
+                            </div>
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex justify-center items-center cursor-pointer emoji-option">
+                              <span class="text-lg">🚀</span>
+                            </div>
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex justify-center items-center cursor-pointer emoji-option">
+                              <span class="text-lg">⭐</span>
+                            </div>
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex justify-center items-center cursor-pointer emoji-option">
+                              <span class="text-lg">🏆</span>
+                            </div>
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex justify-center items-center cursor-pointer emoji-option">
+                              <span class="text-lg">🎯</span>
+                            </div>
+                            <div
+                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex justify-center items-center cursor-pointer emoji-option">
+                              <span class="text-lg">+</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="profile-badge" class="mr-4 h-5 w-5 accent-pix">
+                      <div class="w-full">
+                        <label for="profile-badge" class="font-medium cursor-pointer flex justify-between">
+                          <span>Badge exclusiva no perfil</span>
+                          <span class="text-pix font-light">+R$6</span>
+                        </label>
+                        <p class="text-xs text-gray-400">Ganhe uma badge exclusiva por 30 dias no seu perfil!</p>
+                        <div class="mt-2 flex items-center">
+                          <div class="flex space-x-2">
+                            <div
+                              class="w-6 h-6 rounded-full bg-gradient-to-r from-pix to-purple-500 flex items-center justify-center text-[10px] font-bold">
+                              VIP</div>
+                            <div
+                              class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center text-[10px] font-bold">
+                              PRO</div>
+                            <div
+                              class="w-6 h-6 rounded-full bg-gradient-to-r from-yellow-500 to-red-500 flex items-center justify-center text-[10px] font-bold">
+                              TOP</div>
+                          </div>
+                          <span class="text-xs ml-3 text-gray-400">Escolha um estilo na próxima etapa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-pix/20 to-accent/20 p-4 rounded-lg border border-pix/30 mb-5">
+                  <div class="flex items-start">
+                    <div class="text-pix text-lg mr-3 mt-1">
+                      <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-sm mb-1">Dica especial!</h4>
+                      <p class="text-xs text-gray-300">Os streamers <span class="text-pix">sempre reagem</span> às
+                        animações e efeitos sonoros durante as lives! Aproveite esta oportunidade para tornar sua doação
+                        inesquecível!</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-darker p-4 rounded-lg border border-accent/20 mb-6">
+                  <div class="flex items-center justify-between">
+                    <div class="text-sm">Valor total da doação:</div>
+                    <div class="text-pix font-medium text-lg">R$10</div>
+                  </div>
+                  <div class="mt-1 flex items-center justify-between text-xs text-gray-400">
+                    <span>Doação base: R$5</span>
+                    <span>Extras: +R$5</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-5">
+                  <button id="back-to-step1"
+                    class="bg-secondary/50 hover:bg-secondary/70 transition-all py-3 px-6 rounded-lg font-medium text-sm">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span>Voltar</span>
+                  </button>
+
+                  <button id="continue-to-step3"
+                    class="bg-pix/90 hover:bg-pix transition-all py-3 px-6 rounded-lg font-medium text-sm shadow-lg flex items-center">
+                    <span>Continuar</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-container" id="step3">
+            <div class="p-8">
+              <div class="mb-6">
+                <h3 class="text-lg font-medium mb-3 text-center">Torne-se um apoiador mensal</h3>
+                <p class="text-sm text-gray-300 text-center mb-6">Seu apoio contínuo faz toda a diferença! Escolha o
+                  plano que mais combina com você.</p>
+
+                <div class="space-y-4 mb-6">
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-accent/50 transition-all cursor-pointer relative">
+                    <div class="absolute -top-2 -right-2 bg-pix text-xs py-1 px-2 rounded-full shadow-md">
+                      Popular
+                    </div>
+                    <div class="flex items-center">
+                      <input type="radio" name="subscription" id="monthly-5" value="5" class="mr-4 h-5 w-5 accent-pix">
+                      <div>
+                        <label for="monthly-5" class="font-medium cursor-pointer">Apoiador Bronze</label>
+                        <div class="flex items-baseline">
+                          <span class="text-lg font-bold mr-1">R$5</span>
+                          <span class="text-xs text-gray-400">/mês</span>
+                        </div>
+                        <ul class="text-xs text-gray-300 mt-1 space-y-1">
+                          <li class="flex items-center"><i class="fas fa-check text-pix mr-2"></i> Mensagem destacada
+                            nas streams</li>
+                          <li class="flex items-center"><i class="fas fa-check text-pix mr-2"></i> Badge especial no
+                            chat</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-pix/40 hover:border-pix transition-all cursor-pointer relative transform scale-[1.02] shadow-md">
+                    <div
+                      class="absolute -top-2 -right-2 bg-gradient-to-r from-pix to-accent text-xs py-1 px-2 rounded-full shadow-md flex items-center">
+                      <i class="fas fa-star mr-1"></i> Melhor custo-benefício
+                    </div>
+                    <div class="flex items-center">
+                      <input type="radio" name="subscription" id="monthly-10" value="10" checked
+                        class="mr-4 h-5 w-5 accent-pix">
+                      <div>
+                        <label for="monthly-10" class="font-medium cursor-pointer">Apoiador Prata</label>
+                        <div class="flex items-baseline">
+                          <span class="text-lg font-bold mr-1">R$10</span>
+                          <span class="text-xs text-gray-400">/mês</span>
+                        </div>
+                        <ul class="text-xs text-gray-300 mt-1 space-y-1">
+                          <li class="flex items-center"><i class="fas fa-check text-pix mr-2"></i> <b>Tudo do plano
+                              Bronze</b></li>
+                          <li class="flex items-center"><i class="fas fa-check text-pix mr-2"></i> <b>Efeito sonoro
+                              grátis toda semana</b></li>
+                          <li class="flex items-center"><i class="fas fa-check text-pix mr-2"></i> Acesso a conteúdo
+                            exclusivo</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-accent/50 transition-all cursor-pointer">
+                    <div class="flex items-center">
+                      <input type="radio" name="subscription" id="monthly-20" value="20"
+                        class="mr-4 h-5 w-5 accent-pix">
+                      <div>
+                        <label for="monthly-20" class="font-medium cursor-pointer">Apoiador Ouro</label>
+                        <div class="flex items-baseline">
+                          <span class="text-lg font-bold mr-1">R$20</span>
+                          <span class="text-xs text-gray-400">/mês</span>
+                        </div>
+                        <ul class="text-xs text-gray-300 mt-1 space-y-1">
+                          <li class="flex items-center"><i class="fas fa-check text-pix mr-2"></i> <b>Tudo do plano
+                              Prata</b></li>
+                          <li class="flex items-center"><i class="fas fa-check text-pix mr-2"></i> <b>Animação
+                              personalizada toda semana</b></li>
+                          <li class="flex items-center"><i class="fas fa-check text-pix mr-2"></i> Encontros VIP com os
+                            streamers</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-accent/50 transition-all cursor-pointer">
+                    <div class="flex items-center">
+                      <input type="radio" name="subscription" id="no-subscription" value="0"
+                        class="mr-4 h-5 w-5 accent-pix">
+                      <div>
+                        <label for="no-subscription" class="font-medium cursor-pointer">Apenas doação única</label>
+                        <p class="text-xs text-gray-400">Prefiro fazer apenas uma doação única neste momento.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-pix/20 to-accent/20 p-4 rounded-lg border border-pix/30 mb-6">
+                  <div class="flex items-start">
+                    <div class="text-pix text-lg mr-3 mt-1">
+                      <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-sm mb-1">Compromisso de transparência</h4>
+                      <p class="text-xs text-gray-300">Você pode cancelar sua assinatura a qualquer momento, sem taxas.
+                        87% dos nossos apoiadores mensais renovam por mais de 6 meses devido aos benefícios exclusivos!
+                      </p>
+                      <div class="mt-2 flex items-center">
+                        <div class="h-2 w-full bg-secondary/50 rounded-full overflow-hidden">
+                          <div class="h-full w-[87%] bg-gradient-to-r from-pix to-accent"></div>
+                        </div>
+                        <span class="text-xs ml-2 text-pix font-medium">87%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-secondary/30 p-4 rounded-lg border border-accent/20 mb-6">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-start">
+                      <div class="text-green-400 text-lg mr-3">
+                        <i class="fas fa-users"></i>
+                      </div>
+                      <div>
+                        <h4 class="font-medium text-sm">Junte-se à comunidade</h4>
+                        <p class="text-xs text-gray-300"><span id="donor-count"
+                            class="font-medium text-green-400">23</span> pessoas já se tornaram apoiadores hoje!</p>
+                      </div>
+                    </div>
+                    <div class="flex -space-x-2">
+                      <div class="w-6 h-6 rounded-full bg-pix flex items-center justify-center text-xs">M</div>
+                      <div class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-xs">R</div>
+                      <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-xs">J</div>
+                      <div class="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs">+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-5">
+                  <button id="back-to-step2"
+                    class="bg-secondary/50 hover:bg-secondary/70 transition-all py-3 px-6 rounded-lg font-medium text-sm">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span>Voltar</span>
+                  </button>
+
+                  <button id="continue-to-step4"
+                    class="bg-pix/90 hover:bg-pix transition-all py-3 px-6 rounded-lg font-medium text-sm shadow-lg flex items-center">
+                    <span>Finalizar Doação</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nova etapa: Método de Pagamento -->
+          <div class="step-container hidden" id="step4">
+            <div class="p-8">
+              <div class="mb-6">
+                <h3 class="text-lg font-medium mb-3 text-center">Escolha o método de pagamento</h3>
+                <p class="text-sm text-gray-300 text-center mb-6">Selecione como você prefere realizar sua doação</p>
+
+                <div class="space-y-4 mb-6">
+                  <!-- Opção PIX -->
+                  <div class="bg-secondary/20 p-5 rounded-lg border border-pix/40 hover:border-pix transition-all cursor-pointer relative transform scale-[1.02] shadow-md">
+                    <div class="absolute -top-2 -right-2 bg-pix text-xs py-1 px-2 rounded-full shadow-md">
+                      Mais rápido!
+                    </div>
+                    <div class="flex items-start">
+                      <input type="radio" name="payment-method" id="pix" checked class="mr-4 h-5 w-5 accent-pix mt-1">
+                      <div class="w-full">
+                        <label for="pix" class="font-medium cursor-pointer flex justify-between items-center">
+                          <div class="flex items-center">
+                            <div class="bg-pix/20 p-2 rounded-md mr-3">
+                              <img src="https://www.bcb.gov.br/content/estabilidadefinanceira/pix/logo_pix.png" alt="PIX" class="h-8">
+                            </div>
+                            <span>PIX</span>
+                          </div>
+                          <span class="text-pix">Instantâneo</span>
+                        </label>
+                        <p class="text-xs text-gray-400 mt-1">Pagamento imediato via QR Code ou chave PIX. Aprovação em segundos!</p>
+                        <div class="mt-3 pix-details">
+                          <div class="bg-darker p-3 rounded-md">
+                            <div class="text-xs text-gray-300 mb-2">
+                              Na próxima etapa você receberá um QR Code para escaneamento ou uma chave para copiar e colar no seu aplicativo bancário.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Opção Cartão de Crédito/Débito -->
+                  <div class="bg-secondary/20 p-5 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
+                    <div class="flex items-start">
+                      <input type="radio" name="payment-method" id="card" class="mr-4 h-5 w-5 accent-pix mt-1">
+                      <div class="w-full">
+                        <label for="card" class="font-medium cursor-pointer flex justify-between items-center">
+                          <div class="flex items-center">
+                            <div class="bg-secondary/50 p-2 rounded-md mr-3">
+                              <div class="flex space-x-1">
+                                <i class="fab fa-cc-visa text-blue-400 text-xl"></i>
+                                <i class="fab fa-cc-mastercard text-orange-400 text-xl"></i>
+                                <i class="fab fa-cc-amex text-blue-300 text-xl"></i>
+                              </div>
+                            </div>
+                            <span>Cartão de Crédito/Débito</span>
+                          </div>
+                          <span class="text-gray-300">Seguro</span>
+                        </label>
+                        <p class="text-xs text-gray-400 mt-1">Pagamento seguro com cartão de crédito ou débito. Dados protegidos por criptografia.</p>
+                        <div class="mt-3 hidden card-details">
+                          <div class="space-y-3">
+                            <input type="text" placeholder="Número do cartão" class="w-full bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
+                            <div class="flex space-x-3">
+                              <input type="text" placeholder="MM/AA" class="flex-1 bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
+                              <input type="text" placeholder="CVV" class="flex-1 bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
+                            </div>
+                            <input type="text" placeholder="Nome no cartão" class="w-full bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
+                          </div>
+                          <div class="mt-3 flex justify-between items-center">
+                            <div class="text-xs text-gray-300 flex items-center">
+                              <i class="fas fa-lock mr-1"></i>
+                              Seus dados estão seguros
+                            </div>
+                            <div class="text-xs bg-pix/50 px-2 py-1 rounded">
+                              100% seguro
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Opção PayPal -->
+                  <div class="bg-secondary/20 p-5 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
+                    <div class="flex items-start">
+                      <input type="radio" name="payment-method" id="paypal" class="mr-4 h-5 w-5 accent-pix mt-1">
+                      <div class="w-full">
+                        <label for="paypal" class="font-medium cursor-pointer flex justify-between items-center">
+                          <div class="flex items-center">
+                            <div class="bg-secondary/50 p-2 rounded-md mr-3">
+                              <i class="fab fa-paypal text-blue-400 text-2xl"></i>
+                            </div>
+                            <span>PayPal</span>
+                          </div>
+                          <span class="text-gray-300">Internacional</span>
+                        </label>
+                        <p class="text-xs text-gray-400 mt-1">Pagamento rápido e seguro via conta PayPal. Suporte internacional!</p>
+                        <div class="mt-3 hidden paypal-details">
+                          <div class="bg-darker p-3 rounded-md">
+                            <div class="text-xs text-gray-300 mb-2">
+                              Você será redirecionado para a página segura do PayPal para completar sua doação.
+                            </div>
+                            <div class="text-xs text-gray-400">
+                              Nota: Não é necessário ter uma conta PayPal para fazer pagamentos com cartão de crédito através deste método.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-pix/20 to-accent/20 p-4 rounded-lg border border-pix/30 mb-6">
+                  <div class="flex items-start">
+                    <div class="text-pix text-lg mr-3 mt-1">
+                      <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-sm mb-1">Pagamento 100% seguro</h4>
+                      <p class="text-xs text-gray-300">Todos os nossos métodos de pagamento são criptografados e seguros. Suas informações financeiras nunca são armazenadas em nossos servidores.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bg-darker p-4 rounded-lg border border-accent/20">
+                  <div class="flex items-center justify-between">
+                    <div class="text-sm">Valor total da doação:</div>
+                    <div class="text-pix font-medium text-lg">R$10</div>
+                  </div>
+                  <div class="mt-1 flex items-center justify-between text-xs text-gray-400">
+                    <span>Doação base: R$5</span>
+                    <span>Extras: +R$5</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-5">
+                  <button id="back-to-step3"
+                    class="bg-secondary/50 hover:bg-secondary/70 transition-all py-3 px-6 rounded-lg font-medium text-sm">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span>Voltar</span>
+                  </button>
+
+                  <button id="continue-to-step5"
+                    class="bg-pix/90 hover:bg-pix transition-all py-3 px-6 rounded-lg font-medium text-sm shadow-lg flex items-center">
+                    <span>Finalizar doação</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-xl p-6 shadow-elegant">
+          <div class="flex justify-between items-center mb-5">
+            <h3 class="font-title font-medium text-base">Últimas doações</h3>
+            <div class="flex items-center">
+              <div class="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse mr-2"></div>
+              <span class="text-xs text-gray-400">Ao vivo</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-secondary/50 rounded-xl p-4 flex items-center border border-accent/10">
+              <div
+                class="flex-shrink-0 w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center font-medium text-sm mr-3">
+                M
+              </div>
+              <div class="flex-grow min-w-0">
+                <p class="font-medium text-sm truncate">MarceloGamer</p>
+                <p class="text-sm text-gray-400 truncate">Bom jogo hoje!</p>
+              </div>
+              <div class="text-pix font-medium text-sm ml-3">R$50</div>
+            </div>
+
+            <div class="bg-secondary/50 rounded-xl p-4 flex items-center border border-accent/10">
+              <div
+                class="flex-shrink-0 w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center font-medium text-sm mr-3">
+                J
+              </div>
+              <div class="flex-grow min-w-0">
+                <p class="font-medium text-sm truncate">JulianaS2</p>
+                <p class="text-sm text-gray-400 truncate">Vc é o melhor!</p>
+              </div>
+              <div class="text-pix font-medium text-sm ml-3">R$20</div>
+            </div>
+
+            <div
+              class="bg-secondary/50 rounded-xl p-4 flex items-center border border-accent/10 sm:col-span-2 lg:col-span-1">
+              <div
+                class="flex-shrink-0 w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center font-medium text-sm mr-3">
+                P
+              </div>
+              <div class="flex-grow min-w-0">
+                <p class="font-medium text-sm truncate">PedroJogador</p>
+                <p class="text-sm text-gray-400 truncate">Bora mais!</p>
+              </div>
+              <div class="text-pix font-medium text-sm ml-3">R$10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-3 xl:col-span-3 space-y-6 z-10 order-3">
+        <div class="bg-card rounded-xl overflow-hidden shadow-elegant">
+          <div class="bg-gradient-elegant px-6 py-4">
+            <h3 class="font-title font-medium text-base">Pessoas doando agora</h3>
+          </div>
+
+          <div class="p-6 text-center">
+            <div class="flex items-center justify-center">
+              <div class="text-4xl font-light text-pix" id="active-donors-count">37</div>
+              <div class="text-sm text-gray-400 ml-3 text-left">pessoas<br>apoiando<br>agora</div>
+            </div>
+
+            <div class="mt-4 text-sm text-center text-gray-400">
+              Junte-se a eles e apoie o streamer!
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-xl overflow-hidden shadow-elegant">
+          <div class="bg-gradient-elegant px-6 py-4">
+            <h3 class="font-title font-medium text-base">Top Doadores da Semana</h3>
+          </div>
+
+          <div class="p-5">
+            <div class="space-y-3">
+              <div class="flex items-center py-2 px-3 bg-secondary/30 rounded-lg">
+                <div class="w-6 h-6 rounded-full bg-pix/80 flex items-center justify-center text-sm font-medium mr-3">1
+                </div>
+                <span class="text-sm text-gray-200">FelipeGamer</span>
+                <span class="text-sm text-pix font-medium ml-auto">R$200</span>
+              </div>
+
+              <div class="flex items-center py-2 px-3 bg-secondary/30 rounded-lg">
+                <div
+                  class="w-6 h-6 rounded-full bg-gray-400/70 flex items-center justify-center text-sm font-medium mr-3">
+                  2
+                </div>
+                <span class="text-sm text-gray-200">MariaPlayer</span>
+                <span class="text-sm text-pix font-medium ml-auto">R$150</span>
+              </div>
+
+              <div class="flex items-center py-2 px-3 bg-secondary/30 rounded-lg">
+                <div
+                  class="w-6 h-6 rounded-full bg-amber-700/70 flex items-center justify-center text-sm font-medium mr-3">
+                  3
+                </div>
+                <span class="text-sm text-gray-200">Carlos_Top</span>
+                <span class="text-sm text-pix font-medium ml-auto">R$120</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-xl p-6 shadow-elegant">
+          <p class="text-sm text-center mb-4 text-gray-300">Convide seus amigos:</p>
+          <div class="flex justify-center space-x-5">
+            <button
+              class="bg-secondary/60 w-10 h-10 rounded-full flex items-center justify-center transition-all border border-accent/20 hover:bg-accent/30 hover:text-pix">
+              <i class="fab fa-twitter text-base"></i>
+            </button>
+            <button
+              class="bg-secondary/60 w-10 h-10 rounded-full flex items-center justify-center transition-all border border-accent/20 hover:bg-accent/30 hover:text-pix">
+              <i class="fab fa-facebook-f text-base"></i>
+            </button>
+            <button
+              class="bg-secondary/60 w-10 h-10 rounded-full flex items-center justify-center transition-all border border-accent/20 hover:bg-accent/30 hover:text-pix">
+              <i class="fab fa-whatsapp text-base"></i>
+            </button>
+            <button
+              class="bg-secondary/60 w-10 h-10 rounded-full flex items-center justify-center transition-all border border-accent/20 hover:bg-accent/30 hover:text-pix">
+              <i class="fab fa-instagram text-base"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-xl p-6 shadow-elegant">
+          <div class="grid grid-cols-3 gap-3 text-center">
+            <div class="bg-secondary/30 p-4 rounded-lg">
+              <i class="fas fa-shield-alt text-pix opacity-80 block mb-2 text-lg"></i>
+              <span class="text-sm text-gray-300">Seguro</span>
+            </div>
+            <div class="bg-secondary/30 p-4 rounded-lg">
+              <i class="fas fa-star text-pix opacity-80 block mb-2 text-lg"></i>
+              <span class="text-sm text-gray-300">Premium</span>
+            </div>
+            <div class="bg-secondary/30 p-4 rounded-lg">
+              <i class="fas fa-lock text-pix opacity-80 block mb-2 text-lg"></i>
+              <span class="text-sm text-gray-300">Protegido</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-card-dark text-gray-400 py-5 px-6 border-t border-accent/10 mt-8">
+    <div class="container mx-auto">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <div class="text-base text-pix opacity-80 mr-3">
+            <i class="fas fa-crown"></i>
+          </div>
+          <p class="font-light">StreamBoost © 2025</p>
+        </div>
+
+        <div class="flex space-x-6">
+          <a href="#" class="hover:text-pix transition-colors">Termos</a>
+          <a href="#" class="hover:text-pix transition-colors">Privacidade</a>
+          <a href="#" class="hover:text-pix transition-colors">Suporte</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const step1 = document.getElementById('step1');
+      const step2 = document.getElementById('step2');
+      const step3 = document.getElementById('step3');
+      const step4 = document.getElementById('step4');
+      const step1Indicator = document.getElementById('step1-indicator');
+      const step2Indicator = document.getElementById('step2-indicator');
+      const step3Indicator = document.getElementById('step3-indicator');
+      const step4Indicator = document.getElementById('step4-indicator');
+
+      const donationName = document.getElementById('donation-name');
+      const donationAmount = document.getElementById('donation-amount');
+      const donationMessage = document.getElementById('donation-message');
+      const charCounter = document.getElementById('char-counter');
+      const summaryName = document.getElementById('summary-name');
+      const summaryAmount = document.getElementById('summary-amount');
+      const summaryType = document.getElementById('summary-type');
+
+      const continueToStep2 = document.getElementById('continue-to-step2');
+      const monthlyDonation = document.getElementById('monthly-donation');
+      const continueToStep3 = document.getElementById('continue-to-step3');
+      const continueToStep4 = document.getElementById('continue-to-step4');
+      const startNewDonation = document.getElementById('start-new-donation');
+      const copyPix = document.getElementById('copy-pix');
+
+      const amountButtons = {
+        'amount-2': 2,
+        'amount-5': 5,
+        'amount-10': 10
+      };
+
+      Object.keys(amountButtons).forEach(id => {
+        const button = document.getElementById(id);
+        button.addEventListener('click', function () {
+          donationAmount.value = amountButtons[id];
+        });
+      });
+
+      donationMessage.addEventListener('input', function () {
+        charCounter.textContent = `${this.value.length}/280 caracteres`;
+      });
+
+      continueToStep2.addEventListener('click', function () {
+        if (donationName.value.trim() === '' || donationAmount.value <= 0) {
+          alert('Por favor, preencha seu nome e um valor válido.');
+          return;
+        }
+
+        step1.classList.remove('active');
+        step2.classList.add('active');
+        step1Indicator.classList.remove('active');
+        step1Indicator.classList.add('completed');
+        step1Indicator.innerHTML = '<i class="fas fa-check"></i>';
+        step2Indicator.classList.add('active');
+
+        summaryName.textContent = donationName.value;
+        summaryAmount.textContent = `R$ ${parseFloat(donationAmount.value).toFixed(2)}`;
+      });
+
+      monthlyDonation.addEventListener('click', function () {
+        summaryType.textContent = 'Doação mensal';
+        goToStep3();
+      });
+
+      continueToStep3.addEventListener('click', function () {
+        summaryType.textContent = 'Doação única';
+        goToStep3();
+      });
+
+      function goToStep3() {
+      startNewDonation.addEventListener('click', function () {
+        donationName.value = '';
+        donationAmount.value = '20';
+        donationMessage.value = '';
+        charCounter.textContent = '0/280 caracteres';
+
+        step4.classList.remove('active');
+        step1.classList.add('active');
+        step1Indicator.classList.add('active');
+        step1Indicator.classList.remove('completed');
+        step1Indicator.textContent = '1';
+        step2Indicator.classList.remove('active');
+        step2Indicator.classList.remove('completed');
+        step2Indicator.textContent = '2';
+        step3Indicator.classList.remove('active');
+        step3Indicator.classList.remove('completed');
+        step4Indicator.classList.remove('active');
+        step4Indicator.classList.remove('completed');
+      });
+
+      copyPix.addEventListener('click', function () {
+        const pixKey = this.previousElementSibling.textContent.trim();
+        navigator.clipboard.writeText(pixKey);
+
+        const originalIcon = this.innerHTML;
+        this.innerHTML = '<i class="fas fa-check text-pix"></i>';
+        setTimeout(() => {
+          this.innerHTML = originalIcon;
+        }, 2000);
+      });
+
+      const counter = {
+        min: 35,
+        max: 42,
+        current: 37
+      };
+
+      function updateCounter() {
+        const change = Math.random() > 0.5 ? 1 : -1;
+        counter.current += change;
+
+        if (counter.current > counter.max) counter.current = counter.max;
+        if (counter.current < counter.min) counter.current = counter.min;
+
+        document.getElementById('active-donors-count').textContent = counter.current;
+      }
+
+      setInterval(updateCounter, Math.random() * 4000 + 3000);
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const step1 = document.getElementById('step1');
+      const step2 = document.getElementById('step2');
+      const step3 = document.getElementById('step3');
+      const step4 = document.getElementById('step4');
+
+      const step1Indicator = document.getElementById('step1-indicator');
+      const step2Indicator = document.getElementById('step2-indicator');
+      const step3Indicator = document.getElementById('step3-indicator');
+      const step4Indicator = document.getElementById('step4-indicator');
+
+      const continueToStep2Btn = document.getElementById('continue-to-step2');
+      const continueToStep3Btn = document.getElementById('continue-to-step3');
+      const continueToStep4Btn = document.getElementById('continue-to-step4');
+      const continueToStep5Btn = document.getElementById('continue-to-step5');
+
+      const backToStep1Btn = document.getElementById('back-to-step1');
+      const backToStep2Btn = document.getElementById('back-to-step2');
+      const backToStep3Btn = document.getElementById('back-to-step3');
+
+      continueToStep2Btn.addEventListener('click', function () {
+        step1.classList.remove('active');
+        step2.classList.add('active');
+
+        step1Indicator.classList.remove('active');
+        step1Indicator.classList.add('completed');
+        step2Indicator.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      continueToStep3Btn.addEventListener('click', function () {
+        step2.classList.remove('active');
+        step3.classList.add('active');
+
+        step2Indicator.classList.remove('active');
+        step2Indicator.classList.add('completed');
+        step3Indicator.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      continueToStep4Btn.addEventListener('click', function () {
+        step3.classList.remove('active');
+        step4.classList.add('active');
+
+        step3Indicator.classList.remove('active');
+        step3Indicator.classList.add('completed');
+        step4Indicator.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      continueToStep5Btn.addEventListener('click', function () {
+        const donationName = document.getElementById('donation-name').value || 'Anônimo';
+        const donationAmount = document.getElementById('donation-amount').value || '5';
+
+        alert(`Obrigado ${donationName} pela sua doação de R$${donationAmount}! Redirecionando para pagamento...`);
+      });
+
+      backToStep1Btn.addEventListener('click', function () {
+        step2.classList.remove('active');
+        step1.classList.add('active');
+
+        step2Indicator.classList.remove('active');
+        step1Indicator.classList.remove('completed');
+        step1Indicator.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      backToStep2Btn.addEventListener('click', function () {
+        step3.classList.remove('active');
+        step2.classList.add('active');
+
+        step3Indicator.classList.remove('active');
+        step2Indicator.classList.remove('completed');
+        step2Indicator.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      backToStep3Btn.addEventListener('click', function () {
+        step4.classList.remove('active');
+        step3.classList.add('active');
+
+        step4Indicator.classList.remove('active');
+        step3Indicator.classList.remove('completed');
+        step3Indicator.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      const donationMessage = document.getElementById('donation-message');
+      const charCounter = document.getElementById('char-counter');
+
+      donationMessage.addEventListener('input', function () {
+        const currentLength = this.value.length;
+        const maxLength = this.getAttribute('maxlength');
+        charCounter.textContent = `${currentLength}/${maxLength} caracteres`;
+      });
+
+      const amount2Btn = document.getElementById('amount-2');
+      const amount5Btn = document.getElementById('amount-5');
+      const amount10Btn = document.getElementById('amount-10');
+      const donationAmountInput = document.getElementById('donation-amount');
+
+      const setActiveAmountButton = (button) => {
+        [amount2Btn, amount5Btn, amount10Btn].forEach(btn => {
+          btn.classList.remove('bg-pix/20', 'border-pix/30', 'text-white', 'font-medium', 'transform', 'scale-110', 'shadow-lg');
+          btn.classList.add('text-gray-300');
+        });
+
+        button.classList.remove('text-gray-300');
+        button.classList.add('bg-pix/20', 'border-pix/30', 'text-white', 'font-medium', 'transform', 'scale-110', 'shadow-lg');
+      };
+
+      amount2Btn.addEventListener('click', function () {
+        donationAmountInput.value = '2';
+        setActiveAmountButton(this);
+      });
+
+      amount5Btn.addEventListener('click', function () {
+        donationAmountInput.value = '5';
+        setActiveAmountButton(this);
+      });
+
+      amount10Btn.addEventListener('click', function () {
+        donationAmountInput.value = '10';
+        setActiveAmountButton(this);
+      });
+
+      const soundEffectCheckbox = document.getElementById('sound-effect');
+      const soundEffectOptions = document.querySelector('.sound-effect-options');
+
+      soundEffectCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+          soundEffectOptions.classList.remove('hidden');
+        } else {
+          soundEffectOptions.classList.add('hidden');
+        }
+      });
+
+      const animationOptions = document.querySelectorAll('.animation-option');
+
+      animationOptions.forEach(option => {
+        option.addEventListener('click', function () {
+          animationOptions.forEach(opt => {
+            opt.classList.remove('selected', 'border-pix/40');
+            opt.classList.add('border-accent/20');
+          });
+
+          this.classList.remove('border-accent/20');
+          this.classList.add('selected', 'border-pix/40');
+        });
+      });
+
+      const activeDonorsCountElement = document.getElementById('active-donors-count');
+      const donorCountElement = document.getElementById('donor-count');
+
+      const updateCounters = () => {
+        const currentActiveDonors = parseInt(activeDonorsCountElement.textContent);
+        const randomChange = Math.floor(Math.random() * 3) - 1;
+        const newActiveDonors = Math.max(30, Math.min(45, currentActiveDonors + randomChange));
+        activeDonorsCountElement.textContent = newActiveDonors;
+
+        if (Math.random() > 0.8) {
+          const currentDonorCount = parseInt(donorCountElement.textContent);
+          donorCountElement.textContent = currentDonorCount + 1;
+
+          donorCountElement.classList.add('text-white');
+          setTimeout(() => donorCountElement.classList.remove('text-white'), 1000);
+        }
+      };
+
+      setInterval(updateCounters, 5000);
+    });
+  </script>
+</body>
+
+</html>
