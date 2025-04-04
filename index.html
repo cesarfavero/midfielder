@@ -397,106 +397,41 @@
             </div>
           </div>
 
-          <div class="step-container" id="step2">
+          <div class="step-container hidden" id="step2">
             <div class="p-8">
               <div class="mb-6">
                 <h3 class="text-lg font-medium mb-3 text-center">Personalize sua experiência</h3>
                 <p class="text-sm text-gray-300 text-center mb-6">Escolha extras especiais para tornar sua doação ainda
-                  mais memorável!</p>
+                  mais memorável</p>
+
+                <!-- Progress tracker no topo -->
+                <div class="flex justify-between mb-5 border-b border-accent/30 pb-4">
+                  <div class="text-sm flex items-center">
+                    <div class="text-pix h-6 w-6 rounded-full border border-pix flex items-center justify-center mr-2">
+                      <i class="fas fa-sparkles text-xs"></i>
+                    </div>
+                    <span>Extras selecionados: <span id="selected-extras-count"
+                        class="font-medium text-pix">0</span></span>
+                  </div>
+                  <div class="text-sm flex items-center">
+                    <div class="h-1.5 w-16 rounded-full bg-secondary/50 overflow-hidden">
+                      <div id="extras-progress"
+                        class="h-full w-0 bg-gradient-to-r from-pix to-purple-500 transition-all duration-300"></div>
+                    </div>
+                    <span class="ml-2 text-xs text-gray-400">0%</span>
+                  </div>
+                </div>
 
                 <div class="space-y-4 mb-6">
+                  <!-- Destaque da mensagem -->
                   <div
                     class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
                     <div class="flex items-center">
-                      <input type="checkbox" id="sound-effect" class="mr-4 h-5 w-5 accent-pix">
+                      <input type="checkbox" id="highlighted-message" class="mr-4 h-5 w-5 accent-pix">
                       <div class="w-full">
-                        <label for="sound-effect" class="font-medium cursor-pointer flex justify-between">
-                          <span>Efeito sonoro personalizado</span>
-                          <span class="text-pix font-light">+R$3</span>
-                        </label>
-                        <p class="text-xs text-gray-400">Um efeito sonoro de sua escolha será reproduzido durante a
-                          live!</p>
-                        <div class="mt-3 hidden sound-effect-options">
-                          <select class="w-full bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
-                            <option value="" disabled selected>Escolha um efeito sonoro...</option>
-                            <option value="tada">🎉 Ta-daa!</option>
-                            <option value="drums">🥁 Batuque</option>
-                            <option value="laugh">😂 Risada</option>
-                            <option value="wow">😮 Uau!</option>
-                            <option value="applause">👏 Aplausos</option>
-                            <option value="custom">✨ Personalizado</option>
-                          </select>
-                          <input type="text" placeholder="Mensagem para ser lida com o efeito (opcional)"
-                            class="w-full bg-secondary/50 text-sm p-2 rounded-md mt-2 border border-accent/20">
-                          <div class="mt-2 flex justify-between">
-                            <span class="text-xs text-gray-400">Prévia do som:</span>
-                            <button
-                              class="text-xs bg-pix/60 hover:bg-pix/90 transition px-2 py-1 rounded flex items-center">
-                              <i class="fas fa-play mr-1"></i> Ouvir
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="bg-secondary/20 p-4 rounded-lg border border-pix/40 hover:border-pix transition-all cursor-pointer relative transform scale-[1.02] shadow-md">
-                    <div class="absolute -top-2 -right-2 bg-pix text-xs py-1 px-2 rounded-full shadow-md">
-                      Mais popular!
-                    </div>
-                    <div class="flex items-center">
-                      <input type="checkbox" id="animation" checked class="mr-4 h-5 w-5 accent-pix">
-                      <div class="w-full">
-                        <label for="animation" class="font-medium cursor-pointer flex justify-between">
-                          <span>Animação na tela</span>
+                        <label for="highlighted-message" class="font-medium cursor-pointer flex justify-between">
+                          <span>Destacar mensagem</span>
                           <span class="text-pix font-light">+R$5</span>
-                        </label>
-                        <p class="text-xs text-gray-400">Uma animação exclusiva aparecerá durante a transmissão!</p>
-                        <div class="mt-3 animation-options">
-                          <div class="grid grid-cols-4 gap-2">
-                            <div
-                              class="bg-secondary/50 p-2 rounded-md border border-pix/40 flex flex-col items-center cursor-pointer animation-option selected">
-                              <span class="text-xl">🎊</span>
-                              <span class="text-xs mt-1">Confete</span>
-                            </div>
-                            <div
-                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex flex-col items-center cursor-pointer animation-option">
-                              <span class="text-xl">❤️</span>
-                              <span class="text-xs mt-1">Corações</span>
-                            </div>
-                            <div
-                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex flex-col items-center cursor-pointer animation-option">
-                              <span class="text-xl">🔥</span>
-                              <span class="text-xs mt-1">Fogo</span>
-                            </div>
-                            <div
-                              class="bg-secondary/50 p-2 rounded-md border border-accent/20 flex flex-col items-center cursor-pointer animation-option">
-                              <span class="text-xl">🎮</span>
-                              <span class="text-xs mt-1">Gamer</span>
-                            </div>
-                          </div>
-                          <div class="mt-2 flex space-x-2">
-                            <input type="text" placeholder="Sua mensagem para aparecer com a animação"
-                              class="flex-1 bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
-                            <button
-                              class="bg-pix/60 hover:bg-pix/90 transition px-3 py-1 rounded flex items-center text-sm">
-                              <i class="fas fa-eye mr-1"></i> Ver prévia
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
-                    <div class="flex items-center">
-                      <input type="checkbox" id="highlight" class="mr-4 h-5 w-5 accent-pix">
-                      <div class="w-full">
-                        <label for="highlight" class="font-medium cursor-pointer flex justify-between">
-                          <span>Destaque especial</span>
-                          <span class="text-pix font-light">+R$8</span>
                         </label>
                         <p class="text-xs text-gray-400">Sua doação ficará destacada por mais tempo na transmissão!</p>
                         <div class="mt-2 flex">
@@ -505,10 +440,29 @@
                           </div>
                           <span class="text-xs ml-2 text-gray-400">+30s</span>
                         </div>
+                        <!-- Nova funcionalidade: escolha de cores -->
+                        <div class="mt-3 hidden highlight-options">
+                          <div class="grid grid-cols-5 gap-2">
+                            <div class="w-full h-8 bg-red-500/80 rounded-md cursor-pointer highlight-color"
+                              data-color="red"></div>
+                            <div class="w-full h-8 bg-blue-500/80 rounded-md cursor-pointer highlight-color"
+                              data-color="blue"></div>
+                            <div class="w-full h-8 bg-green-500/80 rounded-md cursor-pointer highlight-color"
+                              data-color="green"></div>
+                            <div class="w-full h-8 bg-purple-500/80 rounded-md cursor-pointer highlight-color"
+                              data-color="purple"></div>
+                            <div
+                              class="w-full h-8 bg-gradient-to-r from-pix to-purple-500 rounded-md cursor-pointer highlight-color"
+                              data-color="gradient"></div>
+                          </div>
+                          <p class="text-xs text-gray-400 mt-2">Escolha a cor do seu destaque. Cores vibrantes chamam
+                            mais atenção!</p>
+                        </div>
                       </div>
                     </div>
                   </div>
 
+                  <!-- Chuva de emojis -->
                   <div
                     class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
                     <div class="flex items-center">
@@ -519,6 +473,7 @@
                           <span class="text-pix font-light">+R$4</span>
                         </label>
                         <p class="text-xs text-gray-400">Uma chuva de emojis personalizados tomará conta da tela!</p>
+                        <!-- Opções de emoji expandidas e interativas -->
                         <div class="mt-3 hidden emoji-rain-options">
                           <div class="grid grid-cols-6 gap-2">
                             <div
@@ -546,11 +501,21 @@
                               <span class="text-lg">+</span>
                             </div>
                           </div>
+                          <!-- Preview animado -->
+                          <div class="mt-3 bg-darker p-2 rounded-md relative h-20 overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                              <p class="text-xs text-gray-400">Prévia da animação</p>
+                            </div>
+                            <div class="emoji-preview absolute inset-0">
+                              <!-- Emojis animados serão inseridos aqui via JS -->
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
+                  <!-- Badge exclusiva no perfil -->
                   <div
                     class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
                     <div class="flex items-center">
@@ -561,19 +526,151 @@
                           <span class="text-pix font-light">+R$6</span>
                         </label>
                         <p class="text-xs text-gray-400">Ganhe uma badge exclusiva por 30 dias no seu perfil!</p>
-                        <div class="mt-2 flex items-center">
-                          <div class="flex space-x-2">
+                        <!-- Opções de badge com seleção visual -->
+                        <div class="mt-2">
+                          <div class="flex space-x-3">
                             <div
-                              class="w-6 h-6 rounded-full bg-gradient-to-r from-pix to-purple-500 flex items-center justify-center text-[10px] font-bold">
-                              VIP</div>
+                              class="badge-option flex flex-col items-center p-2 rounded-md bg-secondary/30 border border-transparent hover:border-pix/40 cursor-pointer">
+                              <div
+                                class="w-8 h-8 rounded-full bg-gradient-to-r from-pix to-purple-500 flex items-center justify-center text-[10px] font-bold mb-1">
+                                VIP</div>
+                              <span class="text-xs">VIP</span>
+                            </div>
                             <div
-                              class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center text-[10px] font-bold">
-                              PRO</div>
+                              class="badge-option flex flex-col items-center p-2 rounded-md bg-secondary/30 border border-transparent hover:border-pix/40 cursor-pointer">
+                              <div
+                                class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center text-[10px] font-bold mb-1">
+                                PRO</div>
+                              <span class="text-xs">PRO</span>
+                            </div>
                             <div
-                              class="w-6 h-6 rounded-full bg-gradient-to-r from-yellow-500 to-red-500 flex items-center justify-center text-[10px] font-bold">
-                              TOP</div>
+                              class="badge-option flex flex-col items-center p-2 rounded-md bg-secondary/30 border border-transparent hover:border-pix/40 cursor-pointer">
+                              <div
+                                class="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-500 to-red-500 flex items-center justify-center text-[10px] font-bold mb-1">
+                                TOP</div>
+                              <span class="text-xs">TOP</span>
+                            </div>
                           </div>
-                          <span class="text-xs ml-3 text-gray-400">Escolha um estilo na próxima etapa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Nova opção: Efeito sonoro personalizado -->
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="custom-sound" class="mr-4 h-5 w-5 accent-pix">
+                      <div class="w-full">
+                        <label for="custom-sound" class="font-medium cursor-pointer flex justify-between">
+                          <div class="flex items-center">
+                            <span>Efeito sonoro personalizado</span>
+                            <div class="ml-2 px-2 py-0.5 bg-gradient-to-r from-pix to-purple-500 text-xs rounded-full">
+                              NOVO</div>
+                          </div>
+                          <span class="text-pix font-light">+R$8</span>
+                        </label>
+                        <p class="text-xs text-gray-400">Seu efeito sonoro favorito será tocado durante a stream!</p>
+                        <!-- Seleção de sons com preview -->
+                        <div class="mt-3 hidden sound-options">
+                          <div class="grid grid-cols-2 gap-2">
+                            <div
+                              class="sound-option flex items-center p-2 bg-secondary/50 rounded-md border border-accent/20 cursor-pointer">
+                              <div class="h-8 w-8 rounded-full bg-accent/30 flex items-center justify-center mr-2">
+                                <i class="fas fa-play text-xs"></i>
+                              </div>
+                              <div>
+                                <p class="text-xs font-medium">Victory Fanfare</p>
+                                <p class="text-[10px] text-gray-400">Final Fantasy</p>
+                              </div>
+                            </div>
+                            <div
+                              class="sound-option flex items-center p-2 bg-secondary/50 rounded-md border border-accent/20 cursor-pointer">
+                              <div class="h-8 w-8 rounded-full bg-accent/30 flex items-center justify-center mr-2">
+                                <i class="fas fa-play text-xs"></i>
+                              </div>
+                              <div>
+                                <p class="text-xs font-medium">Item Collect</p>
+                                <p class="text-[10px] text-gray-400">Super Mario</p>
+                              </div>
+                            </div>
+                            <div
+                              class="sound-option flex items-center p-2 bg-secondary/50 rounded-md border border-accent/20 cursor-pointer">
+                              <div class="h-8 w-8 rounded-full bg-accent/30 flex items-center justify-center mr-2">
+                                <i class="fas fa-play text-xs"></i>
+                              </div>
+                              <div>
+                                <p class="text-xs font-medium">Level Up</p>
+                                <p class="text-[10px] text-gray-400">RPG Classic</p>
+                              </div>
+                            </div>
+                            <div
+                              class="sound-option flex items-center p-2 bg-secondary/50 rounded-md border border-accent/20 cursor-pointer">
+                              <div class="h-8 w-8 rounded-full bg-accent/30 flex items-center justify-center mr-2">
+                                <i class="fas fa-play text-xs"></i>
+                              </div>
+                              <div>
+                                <p class="text-xs font-medium">Applause</p>
+                                <p class="text-[10px] text-gray-400">Audience</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Nova opção: Animação personalizada -->
+                  <div
+                    class="bg-secondary/20 p-4 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="custom-animation" class="mr-4 h-5 w-5 accent-pix">
+                      <div class="w-full">
+                        <label for="custom-animation" class="font-medium cursor-pointer flex justify-between">
+                          <div class="flex items-center">
+                            <span>Animação na tela</span>
+                            <div
+                              class="ml-2 px-2 py-0.5 bg-gradient-to-r from-green-500 to-blue-500 text-xs rounded-full">
+                              POPULAR</div>
+                          </div>
+                          <span class="text-pix font-light">+R$10</span>
+                        </label>
+                        <p class="text-xs text-gray-400">Uma animação incrível aparecerá na stream quando sua doação for
+                          recebida!</p>
+                        <!-- Seleção de animações com miniaturas -->
+                        <div class="mt-3 hidden animation-options">
+                          <div class="grid grid-cols-3 gap-3">
+                            <div class="animation-option cursor-pointer">
+                              <div
+                                class="bg-secondary/50 h-24 rounded-md border border-accent/20 overflow-hidden relative">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                  <img src="https://i.imgur.com/XVpT5hL.gif" alt="Confetti Animation"
+                                    class="h-full object-cover">
+                                </div>
+                              </div>
+                              <p class="text-xs text-center mt-1">Confetti</p>
+                            </div>
+                            <div class="animation-option cursor-pointer">
+                              <div
+                                class="bg-secondary/50 h-24 rounded-md border border-accent/20 overflow-hidden relative">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                  <img src="https://i.imgur.com/L1IKBGf.gif" alt="Fireworks Animation"
+                                    class="h-full object-cover">
+                                </div>
+                              </div>
+                              <p class="text-xs text-center mt-1">Fogos</p>
+                            </div>
+                            <div class="animation-option cursor-pointer">
+                              <div
+                                class="bg-secondary/50 h-24 rounded-md border border-accent/20 overflow-hidden relative">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                  <img src="https://i.imgur.com/7S97FeS.gif" alt="Gold Shower Animation"
+                                    class="h-full object-cover">
+                                </div>
+                              </div>
+                              <p class="text-xs text-center mt-1">Moedas</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -602,6 +699,25 @@
                   <div class="mt-1 flex items-center justify-between text-xs text-gray-400">
                     <span>Doação base: R$5</span>
                     <span>Extras: +R$5</span>
+                  </div>
+                  <!-- Novo: preview em tempo real -->
+                  <div class="mt-3 pt-3 border-t border-accent/20">
+                    <p class="text-xs text-gray-400 mb-1">Visualização da sua doação:</p>
+                    <div class="bg-secondary/50 p-2 rounded-md">
+                      <div class="flex items-center">
+                        <div class="w-7 h-7 rounded-full bg-accent/30 flex items-center justify-center text-xs mr-2">
+                          V
+                        </div>
+                        <div>
+                          <p class="text-xs font-medium">Visitante</p>
+                          <p class="text-[10px] text-gray-300">Sua mensagem personalizada aparecerá aqui</p>
+                        </div>
+                        <div
+                          class="ml-auto bg-gradient-to-r from-pix to-accent/50 rounded-full h-5 px-2 flex items-center justify-center">
+                          <span class="text-[10px] font-medium">R$10</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -778,135 +894,212 @@
             </div>
           </div>
 
-          <!-- Nova etapa: Método de Pagamento -->
+          <!-- Aprimorando a seção de checkout (etapa 4) -->
           <div class="step-container hidden" id="step4">
             <div class="p-8">
               <div class="mb-6">
-                <h3 class="text-lg font-medium mb-3 text-center">Escolha o método de pagamento</h3>
-                <p class="text-sm text-gray-300 text-center mb-6">Selecione como você prefere realizar sua doação</p>
+                <h3 class="text-lg font-medium mb-3 text-center">Finalizar doação</h3>
+                <p class="text-sm text-gray-300 text-center mb-6">Escolha seu método de pagamento preferido</p>
 
-                <div class="space-y-4 mb-6">
-                  <!-- Opção PIX -->
-                  <div class="bg-secondary/20 p-5 rounded-lg border border-pix/40 hover:border-pix transition-all cursor-pointer relative transform scale-[1.02] shadow-md">
-                    <div class="absolute -top-2 -right-2 bg-pix text-xs py-1 px-2 rounded-full shadow-md">
-                      Mais rápido!
+                <!-- Resumo da compra -->
+                <div class="bg-secondary/20 p-4 rounded-lg border border-accent/20 mb-6">
+                  <h4 class="font-medium text-sm mb-3">Resumo da doação</h4>
+
+                  <div class="space-y-2 mb-3">
+                    <div class="flex justify-between text-sm">
+                      <span>Valor base da doação</span>
+                      <span>R$5,00</span>
                     </div>
-                    <div class="flex items-start">
-                      <input type="radio" name="payment-method" id="pix" checked class="mr-4 h-5 w-5 accent-pix mt-1">
-                      <div class="w-full">
-                        <label for="pix" class="font-medium cursor-pointer flex justify-between items-center">
-                          <div class="flex items-center">
-                            <div class="bg-pix/20 p-2 rounded-md mr-3">
-                              <img src="https://www.bcb.gov.br/content/estabilidadefinanceira/pix/logo_pix.png" alt="PIX" class="h-8">
-                            </div>
-                            <span>PIX</span>
-                          </div>
-                          <span class="text-pix">Instantâneo</span>
-                        </label>
-                        <p class="text-xs text-gray-400 mt-1">Pagamento imediato via QR Code ou chave PIX. Aprovação em segundos!</p>
-                        <div class="mt-3 pix-details">
-                          <div class="bg-darker p-3 rounded-md">
-                            <div class="text-xs text-gray-300 mb-2">
-                              Na próxima etapa você receberá um QR Code para escaneamento ou uma chave para copiar e colar no seu aplicativo bancário.
+                    <div class="flex justify-between text-sm">
+                      <span>Destaque da mensagem</span>
+                      <span class="text-pix">+R$5,00</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                      <span>Chuva de emojis</span>
+                      <span class="text-pix">+R$4,00</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                      <span>Efeito sonoro personalizado</span>
+                      <span class="text-pix">+R$8,00</span>
+                    </div>
+                  </div>
+
+                  <div class="border-t border-accent/30 pt-3 flex justify-between">
+                    <span class="font-medium">Total</span>
+                    <span class="font-medium text-pix">R$22,00</span>
+                  </div>
+                </div>
+
+                <div class="mb-5">
+                  <div class="bg-darker p-3 rounded-lg mb-4">
+                    <div class="flex items-center mb-1">
+                      <i class="fas fa-shield-check text-green-500 mr-2"></i>
+                      <span class="text-xs text-green-500">Pagamento 100% seguro</span>
+                    </div>
+                    <p class="text-xs text-gray-400">Todos os dados são criptografados e processados em ambiente seguro.
+                    </p>
+                  </div>
+
+                  <!-- Seleção de método de pagamento com abas mais interativas -->
+                  <div class="mb-4">
+                    <div class="flex space-x-1 mb-4">
+                      <button id="pix-tab"
+                        class="flex-1 py-3 bg-secondary/70 rounded-lg text-sm font-medium flex items-center justify-center payment-tab active">
+                        <img src="https://logodownload.org/wp-content/uploads/2020/01/pix-bc-logo-0.png" alt="PIX"
+                          class="h-5 mr-2">
+                        <span>PIX</span>
+                      </button>
+                      <button id="card-tab"
+                        class="flex-1 py-3 bg-secondary/20 rounded-lg text-sm font-medium flex items-center justify-center payment-tab">
+                        <i class="fas fa-credit-card mr-2"></i>
+                        <span>Cartão</span>
+                      </button>
+                      <button id="paypal-tab"
+                        class="flex-1 py-3 bg-secondary/20 rounded-lg text-sm font-medium flex items-center justify-center payment-tab">
+                        <i class="fab fa-paypal mr-2"></i>
+                        <span>PayPal</span>
+                      </button>
+                    </div>
+
+                    <!-- Conteúdo PIX -->
+                    <div id="pix-content" class="payment-content">
+                      <div
+                        class="bg-gradient-to-b from-[#32BCAD]/10 to-[#32BCAD]/5 rounded-lg p-5 mb-4 text-center border border-[#32BCAD]/30">
+                        <div class="bg-white/10 w-32 h-32 mx-auto rounded-lg p-2 mb-3 relative">
+                          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PIXCodeExample"
+                            alt="QR Code PIX" class="w-full">
+                          <div
+                            class="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black/60 rounded-lg">
+                            <div class="text-center">
+                              <div class="animate-pulse bg-pix/80 text-xs p-1 rounded mb-1">Gerando QR Code...</div>
+                              <p class="text-[10px] text-gray-300">Aguarde um momento</p>
                             </div>
                           </div>
                         </div>
+                        <p class="text-xs mb-2">Escaneie o QR Code acima com o app do seu banco</p>
+                        <div class="flex justify-center space-x-2">
+                          <button
+                            class="bg-[#32BCAD]/30 hover:bg-[#32BCAD]/50 transition-all py-1.5 px-3 rounded text-xs">
+                            <i class="fas fa-copy mr-1"></i>
+                            <span>Copiar código</span>
+                          </button>
+                          <button
+                            class="bg-[#32BCAD]/30 hover:bg-[#32BCAD]/50 transition-all py-1.5 px-3 rounded text-xs">
+                            <i class="fas fa-download mr-1"></i>
+                            <span>Salvar QR</span>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="bg-secondary/20 p-3 rounded-lg border border-accent/20">
+                        <p class="text-xs text-center text-gray-300 mb-2">Após o pagamento, sua doação será confirmada
+                          automaticamente em até 1 minuto</p>
+                        <div class="flex items-center justify-center">
+                          <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                          <span class="text-xs text-green-500">Pagamento PIX disponível 24h</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  <!-- Opção Cartão de Crédito/Débito -->
-                  <div class="bg-secondary/20 p-5 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
-                    <div class="flex items-start">
-                      <input type="radio" name="payment-method" id="card" class="mr-4 h-5 w-5 accent-pix mt-1">
-                      <div class="w-full">
-                        <label for="card" class="font-medium cursor-pointer flex justify-between items-center">
-                          <div class="flex items-center">
-                            <div class="bg-secondary/50 p-2 rounded-md mr-3">
-                              <div class="flex space-x-1">
-                                <i class="fab fa-cc-visa text-blue-400 text-xl"></i>
-                                <i class="fab fa-cc-mastercard text-orange-400 text-xl"></i>
-                                <i class="fab fa-cc-amex text-blue-300 text-xl"></i>
+
+                    <!-- Conteúdo Cartão -->
+                    <div id="card-content" class="payment-content hidden">
+                      <div class="bg-secondary/20 rounded-lg p-4 border border-accent/20 mb-4">
+                        <!-- Preview do cartão -->
+                        <div
+                          class="bg-gradient-to-r from-purple-500/80 to-blue-600/80 rounded-lg p-3 mb-5 shadow-lg relative h-40">
+                          <div class="flex justify-between mb-6">
+                            <div class="text-xs">Cartão de Crédito/Débito</div>
+                            <div class="flex space-x-1">
+                              <img src="https://i.imgur.com/5iPVDTb.png" alt="Visa" class="h-5">
+                              <img src="https://i.imgur.com/EHAdXJL.png" alt="Mastercard" class="h-5">
+                            </div>
+                          </div>
+                          <div class="text-sm tracking-widest mb-3 font-mono">•••• •••• •••• ••••</div>
+                          <div class="flex justify-between items-end">
+                            <div>
+                              <p class="text-[10px] text-gray-200 mb-1">TITULAR</p>
+                              <p class="text-xs font-mono">SEU NOME</p>
+                            </div>
+                            <div>
+                              <p class="text-[10px] text-gray-200 mb-1">VALIDADE</p>
+                              <p class="text-xs font-mono">MM/AA</p>
+                            </div>
+                          </div>
+
+                          <div
+                            class="absolute top-0 right-0 bottom-0 left-0 bg-white/10 backdrop-blur-sm flex items-center justify-center rounded-lg opacity-0 hover:opacity-100 transition-all duration-300 cursor-pointer">
+                            <div class="bg-pix/90 px-3 py-1.5 rounded-full text-xs">Preencher dados do cartão</div>
+                          </div>
+                        </div>
+
+                        <!-- Formulário de cartão -->
+                        <div class="space-y-4">
+                          <div>
+                            <label class="block text-xs mb-1.5">Número do cartão</label>
+                            <div class="bg-darker rounded-md border border-accent/30 flex overflow-hidden">
+                              <input type="text" placeholder="0000 0000 0000 0000"
+                                class="bg-transparent border-0 flex-grow py-2 px-3 text-sm focus:outline-none">
+                              <div class="flex items-center px-3 border-l border-accent/30">
+                                <i class="fas fa-credit-card text-accent/70"></i>
                               </div>
                             </div>
-                            <span>Cartão de Crédito/Débito</span>
                           </div>
-                          <span class="text-gray-300">Seguro</span>
-                        </label>
-                        <p class="text-xs text-gray-400 mt-1">Pagamento seguro com cartão de crédito ou débito. Dados protegidos por criptografia.</p>
-                        <div class="mt-3 hidden card-details">
-                          <div class="space-y-3">
-                            <input type="text" placeholder="Número do cartão" class="w-full bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
-                            <div class="flex space-x-3">
-                              <input type="text" placeholder="MM/AA" class="flex-1 bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
-                              <input type="text" placeholder="CVV" class="flex-1 bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
+
+                          <div class="grid grid-cols-2 gap-4">
+                            <div>
+                              <label class="block text-xs mb-1.5">Validade</label>
+                              <input type="text" placeholder="MM/AA"
+                                class="bg-darker w-full border border-accent/30 rounded-md py-2 px-3 text-sm focus:outline-none focus:border-accent">
                             </div>
-                            <input type="text" placeholder="Nome no cartão" class="w-full bg-secondary/50 text-sm p-2 rounded-md border border-accent/20">
+                            <div>
+                              <label class="block text-xs mb-1.5">CVV</label>
+                              <input type="text" placeholder="123"
+                                class="bg-darker w-full border border-accent/30 rounded-md py-2 px-3 text-sm focus:outline-none focus:border-accent">
+                            </div>
                           </div>
-                          <div class="mt-3 flex justify-between items-center">
-                            <div class="text-xs text-gray-300 flex items-center">
-                              <i class="fas fa-lock mr-1"></i>
-                              Seus dados estão seguros
-                            </div>
-                            <div class="text-xs bg-pix/50 px-2 py-1 rounded">
-                              100% seguro
-                            </div>
+
+                          <div>
+                            <label class="block text-xs mb-1.5">Nome no cartão</label>
+                            <input type="text" placeholder="Como aparece no cartão"
+                              class="bg-darker w-full border border-accent/30 rounded-md py-2 px-3 text-sm focus:outline-none focus:border-accent">
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
 
-                  <!-- Opção PayPal -->
-                  <div class="bg-secondary/20 p-5 rounded-lg border border-accent/20 hover:border-pix/40 transition-all cursor-pointer hover:transform hover:scale-[1.01]">
-                    <div class="flex items-start">
-                      <input type="radio" name="payment-method" id="paypal" class="mr-4 h-5 w-5 accent-pix mt-1">
-                      <div class="w-full">
-                        <label for="paypal" class="font-medium cursor-pointer flex justify-between items-center">
-                          <div class="flex items-center">
-                            <div class="bg-secondary/50 p-2 rounded-md mr-3">
-                              <i class="fab fa-paypal text-blue-400 text-2xl"></i>
-                            </div>
-                            <span>PayPal</span>
-                          </div>
-                          <span class="text-gray-300">Internacional</span>
-                        </label>
-                        <p class="text-xs text-gray-400 mt-1">Pagamento rápido e seguro via conta PayPal. Suporte internacional!</p>
-                        <div class="mt-3 hidden paypal-details">
-                          <div class="bg-darker p-3 rounded-md">
-                            <div class="text-xs text-gray-300 mb-2">
-                              Você será redirecionado para a página segura do PayPal para completar sua doação.
-                            </div>
-                            <div class="text-xs text-gray-400">
-                              Nota: Não é necessário ter uma conta PayPal para fazer pagamentos com cartão de crédito através deste método.
-                            </div>
-                          </div>
-                        </div>
+                      <!-- Opções de parcelamento -->
+                      <div class="mb-4">
+                        <label class="block text-xs mb-1.5">Parcelamento</label>
+                        <select
+                          class="bg-darker w-full border border-accent/30 rounded-md py-2 px-3 text-sm focus:outline-none focus:border-accent appearance-none">
+                          <option>1x de R$22,00 sem juros</option>
+                          <option>2x de R$11,00 sem juros</option>
+                          <option>3x de R$7,33 sem juros</option>
+                        </select>
+                      </div>
+
+                      <button
+                        class="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-lg font-medium text-sm transition-all flex items-center justify-center">
+                        <i class="fas fa-lock mr-2"></i>
+                        <span>Pagar com cartão</span>
+                      </button>
+                    </div>
+
+                    <!-- Conteúdo PayPal -->
+                    <div id="paypal-content" class="payment-content hidden">
+                      <div class="bg-blue-800/40 rounded-lg p-4 border border-blue-700/40 mb-4 text-center">
+                        <img src="https://i.imgur.com/W5vwGDx.png" alt="PayPal" class="h-8 mx-auto mb-4">
+                        <p class="text-sm mb-4">Pague sua doação usando sua conta PayPal de forma rápida e segura.</p>
+                        <button
+                          class="w-full py-3 bg-[#0070ba] hover:bg-[#005ea6] rounded-lg font-medium text-sm transition-all flex items-center justify-center">
+                          <i class="fab fa-paypal mr-2"></i>
+                          <span>Pagar com PayPal</span>
+                        </button>
+                      </div>
+                      <div class="bg-secondary/20 p-3 rounded-lg flex items-center text-center">
+                        <i class="fas fa-info-circle mr-2 text-blue-400"></i>
+                        <p class="text-xs text-gray-300">Você será redirecionado para o site do PayPal para completar o
+                          pagamento de forma segura.</p>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                <div class="bg-gradient-to-r from-pix/20 to-accent/20 p-4 rounded-lg border border-pix/30 mb-6">
-                  <div class="flex items-start">
-                    <div class="text-pix text-lg mr-3 mt-1">
-                      <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div>
-                      <h4 class="font-medium text-sm mb-1">Pagamento 100% seguro</h4>
-                      <p class="text-xs text-gray-300">Todos os nossos métodos de pagamento são criptografados e seguros. Suas informações financeiras nunca são armazenadas em nossos servidores.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="bg-darker p-4 rounded-lg border border-accent/20">
-                  <div class="flex items-center justify-between">
-                    <div class="text-sm">Valor total da doação:</div>
-                    <div class="text-pix font-medium text-lg">R$10</div>
-                  </div>
-                  <div class="mt-1 flex items-center justify-between text-xs text-gray-400">
-                    <span>Doação base: R$5</span>
-                    <span>Extras: +R$5</span>
                   </div>
                 </div>
               </div>
@@ -922,7 +1115,7 @@
                   <button id="continue-to-step5"
                     class="bg-pix/90 hover:bg-pix transition-all py-3 px-6 rounded-lg font-medium text-sm shadow-lg flex items-center">
                     <span>Finalizar doação</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
+                    <i class="fas fa-check ml-2"></i>
                   </button>
                 </div>
               </div>
@@ -1165,6 +1358,23 @@
       });
 
       function goToStep3() {
+        step2.classList.remove('active');
+        step3.classList.add('active');
+        step2Indicator.classList.remove('active');
+        step2Indicator.classList.add('completed');
+        step2Indicator.innerHTML = '<i class="fas fa-check"></i>';
+        step3Indicator.classList.add('active');
+      }
+
+      continueToStep4.addEventListener('click', function () {
+        step3.classList.remove('active');
+        step4.classList.add('active');
+        step3Indicator.classList.remove('active');
+        step3Indicator.classList.add('completed');
+        step3Indicator.innerHTML = '<i class="fas fa-check"></i>';
+        step4Indicator.classList.add('active');
+      });
+
       startNewDonation.addEventListener('click', function () {
         donationName.value = '';
         donationAmount.value = '20';
